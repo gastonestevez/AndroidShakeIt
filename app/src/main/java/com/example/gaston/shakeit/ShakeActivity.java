@@ -1,9 +1,14 @@
 package com.example.gaston.shakeit;
 
 import android.app.Activity;
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class ShakeActivity extends Activity {
 
@@ -11,6 +16,35 @@ public class ShakeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake);
+
+        ((Vibrator)getSystemService(Context.VIBRATOR_SERVICE)).vibrate(500);
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.coin);
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+
+                        mp.release();
+                    }
+                });
+
+        CountDownTimer cntr_aCounter = new CountDownTimer(1100, 1000) {
+            public void onTick(long millisUntilFinished) {
+                mp.start();
+            }
+
+            @Override
+            public void onFinish() {
+                mp.stop();
+                mp.release();
+            }
+        }.start();
+
+            Bundle extras = getIntent().getExtras();
+
+        if(extras != null){
+            String value = extras.getString("RESULTADO");
+            ((TextView) findViewById(R.id.t_resultado)).setText(value);
+        }
     }
 
     @Override

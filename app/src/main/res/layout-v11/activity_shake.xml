@@ -11,8 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_centerHorizontal="true">
 
         <TableRow
             android:layout_width="match_parent"
@@ -48,7 +47,7 @@
                 android:layout_gravity="center_horizontal"
                 android:shadowColor="#ffb559"
                 android:textStyle="bold"
-                android:textSize="64dp" />
+                android:textSize="48dp" />
         </TableRow>
 
     </TableLayout>
